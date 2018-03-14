@@ -32,6 +32,7 @@ namespace SoapClient
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.stations = client.GetAllStations(comboBox1.SelectedItem as string);
+            comboBox2.SelectedIndex = -1;
             comboBox2.Items.Clear();
             comboBox2.Items.AddRange(this.stations);
         }
