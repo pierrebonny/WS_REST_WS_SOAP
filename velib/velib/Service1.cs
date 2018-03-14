@@ -71,7 +71,7 @@ namespace velib
 
         public string GetAvailableBikes(string station, string city)
         {
-            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + firstToUpper(city) + "&apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30");
+            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + city + "&apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30");
             // Create a request for the URL. 
             // If required by the server, set the credentials.
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -90,7 +90,7 @@ namespace velib
             Console.WriteLine(responseFromServer);
             int number = 0;
             string stationn = "";
-            string stringToFind = station.ToUpper();
+            string stringToFind = station;
 
             //browsing all Json Array elements to find the asked one
             foreach (JObject item in j)
@@ -112,17 +112,13 @@ namespace velib
 
             if (stationn != null)
             {
-                return "\n\nStation détectée = " + stationn + "\n\nNombre de vélos disponibles = " + number;
+                return "\n\nStation = " + stationn + "\n\nNombre de vélos disponibles = " + number;
             }
             //else if no station has been detected for the given name
             else
             {
                 return "\n\nAucune information n'a été trouvée à propos de : " + stringToFind;
             }
-        }
-        private String firstToUpper(String s)
-        {
-            return s[0].ToString().ToUpper() + s.Substring(1).ToLower();
         }
     }
 }
