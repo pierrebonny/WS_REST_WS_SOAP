@@ -1,1 +1,3 @@
-# WS_REST_WS_SOAP README
+#README
+##Extensions Ajoutées
+###Graphical User Interface for the client 
