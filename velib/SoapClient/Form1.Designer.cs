@@ -53,7 +53,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(118, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Entrez la ville souhaitée";
+            this.label1.Text = "Choisissez la ville";
             // 
             // label2
             // 
@@ -62,7 +62,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Entrez la station souhaitée";
+            this.label2.Text = "Choisissez la station";
             // 
             // label4
             // 

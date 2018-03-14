@@ -1,7 +1,0 @@
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\obj\Debug\tp3.csprojResolveAssemblyReference.cache
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\obj\Debug\tp3.csproj.CoreCompileInputs.cache
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\bin\Debug\tp3.dll.config
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\bin\Debug\tp3.dll
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\bin\Debug\tp3.pdb
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\obj\Debug\tp3.dll
-C:\Users\Pierre\Documents\Polytech\SI4\ServiceOrientedComputing\TP3\tp3\tp3\obj\Debug\tp3.pdb
