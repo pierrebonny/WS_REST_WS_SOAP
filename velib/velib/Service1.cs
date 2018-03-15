@@ -18,19 +18,20 @@ namespace velibService
             cacheStations = new Dictionary<string, List<string>>();
             cacheCities = new List<string>();
             cacheCities.Add("hey");
-            Task.Delay(15000).ContinueWith(t => freeCache());
+            //Clearing cache every day
+            Task.Delay(86400000).ContinueWith(t => freeCache());
         }
 
         private void freeCache() {
             cacheCities.Clear();
             cacheStations.Clear();
-            Task.Delay(5000).ContinueWith(t => freeCache());
+            Task.Delay(86400000).ContinueWith(t => freeCache());
         }
 
         //Make a request to the JCDecaux server to retrieve all available cities names and returns it as a string list
         public List<string> GetAllCities()
         {
-            if(true)
+            if(cacheCities.ToArray().Length != 0)
             {
                 return cacheCities;
             }
