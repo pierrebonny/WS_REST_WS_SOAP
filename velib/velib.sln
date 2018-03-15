@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "velib", "velib\velib.csproj", "{C6E1F235-683C-4A78-962D-FAD1D0927F58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "velibService", "velib\velibService.csproj", "{C6E1F235-683C-4A78-962D-FAD1D0927F58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoapClient", "SoapClient\SoapClient.csproj", "{151CFF9C-5ECE-4E13-B22F-F3E6EA03484D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consoleClient", "consoleClient\consoleClient.csproj", "{40D99C42-BA60-40A9-9C48-1687F400DC1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{151CFF9C-5ECE-4E13-B22F-F3E6EA03484D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{151CFF9C-5ECE-4E13-B22F-F3E6EA03484D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{151CFF9C-5ECE-4E13-B22F-F3E6EA03484D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D99C42-BA60-40A9-9C48-1687F400DC1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D99C42-BA60-40A9-9C48-1687F400DC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D99C42-BA60-40A9-9C48-1687F400DC1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D99C42-BA60-40A9-9C48-1687F400DC1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

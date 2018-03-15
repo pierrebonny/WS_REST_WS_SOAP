@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly, changez les valeurs de ces attributs.
-[assembly: AssemblyTitle("velib")]
+[assembly: AssemblyTitle("velibService")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("velib")]
+[assembly: AssemblyProduct("velibService")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
