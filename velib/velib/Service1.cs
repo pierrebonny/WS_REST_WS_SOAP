@@ -10,28 +10,13 @@ namespace velibService
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Service1 : IService1
     {
-        private Dictionary<string, List<string>> cacheStations;
-        private List<string> cacheCities;
-
-        public Service1()
-        {
-            cacheStations = new Dictionary<string, List<string>>();
-            cacheCities = new List<string>();
-            cacheCities.Add("hey");
-            //Clearing cache every day
-            Task.Delay(86400000).ContinueWith(t => freeCache());
-        }
-
-        private void freeCache() {
-            cacheCities.Clear();
-            cacheStations.Clear();
-            Task.Delay(86400000).ContinueWith(t => freeCache());
-        }
+        private static Dictionary<string, List<string>> cacheStations = new Dictionary<string,List<string>>();
+        private static List<string> cacheCities = new List<string>();
 
         //Make a request to the JCDecaux server to retrieve all available cities names and returns it as a string list
         public List<string> GetAllCities()
         {
-            if(cacheCities.ToArray().Length != 0)
+            if(cacheCities.Count > 0)
             {
                 return cacheCities;
             }
@@ -59,7 +44,6 @@ namespace velibService
                 //browsing all Json Array elements to find the asked one
                 foreach (JObject item in j)
                 {
-                    Console.WriteLine((string)item.SelectToken("name"));
                     cities.Add((string)item.SelectToken("name"));
                 }
                 cacheCities.AddRange(cities);
@@ -68,11 +52,16 @@ namespace velibService
             
         }
 
+        public async Task<List<string>> GetAllCitiesAsync()
+        {
+            return await Task.Factory.StartNew(() => GetAllCities());
+        }
+
         //Make a request to the JCDecaux server to retrieve all available stations names for the given city name and returns it as a string list
         public List<string> GetAllStations(string city)
         {
-            if (cacheStations.ContainsKey(city)){
-                return cacheStations[city];
+            if (cacheStations.ContainsKey(city.ToLower())){
+                return cacheStations[city.ToLower()];
             }
             else
             {
@@ -102,7 +91,7 @@ namespace velibService
                     {
                         stations.Add((string)item.SelectToken("name"));
                     }
-                    cacheStations.Add(city,stations);
+                    cacheStations.Add(city.ToLower(),stations);
                     return stations;
                 }
                 //if the name doesn't exist in the JCDecaux's database
@@ -113,6 +102,11 @@ namespace velibService
                 }
             }
                         
+        }
+
+        public async Task<List<string>> GetAllStationsAsync(string city)
+        {
+            return await Task.Factory.StartNew(() => GetAllStations(city));
         }
 
         public string GetAvailableBikes(string station, string city)
@@ -173,6 +167,11 @@ namespace velibService
             }
             
             
+        }
+
+        public async Task<string> GetAvailableBikesAsync(string station, string city)
+        {
+            return await Task.Factory.StartNew(() => GetAvailableBikes(station, city));
         }
     }
 }

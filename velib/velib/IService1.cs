@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace velibService
 {
@@ -15,10 +16,19 @@ namespace velibService
         string GetAvailableBikes(String station, String city);
 
         [OperationContract]
+        Task<String> GetAvailableBikesAsync(String station, String city);
+
+        [OperationContract]
         List<String> GetAllCities();
 
         [OperationContract]
+        Task<List<String>> GetAllCitiesAsync();
+
+        [OperationContract]
         List<String> GetAllStations(String city);
+
+        [OperationContract]
+        Task<List<String>> GetAllStationsAsync(String city);
 
         // TODO: ajoutez vos opérations de service ici
     }
