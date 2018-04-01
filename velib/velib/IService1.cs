@@ -13,23 +13,12 @@ namespace velibService
     public interface IService1
     {
         [OperationContract]
-        string GetAvailableBikes(String station, String city);
+        Task<string> GetAvailableBikes(String station, String city);
 
         [OperationContract]
-        Task<String> GetAvailableBikesAsync(String station, String city);
+        Task<List<String>> GetAllCities();
 
         [OperationContract]
-        List<String> GetAllCities();
-
-        [OperationContract]
-        Task<List<String>> GetAllCitiesAsync();
-
-        [OperationContract]
-        List<String> GetAllStations(String city);
-
-        [OperationContract]
-        Task<List<String>> GetAllStationsAsync(String city);
-
-        // TODO: ajoutez vos opérations de service ici
+        Task<List<String>> GetAllStations(String city);
     }
 }

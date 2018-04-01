@@ -14,7 +14,7 @@ namespace velibService
         private static List<string> cacheCities = new List<string>();
 
         //Make a request to the JCDecaux server to retrieve all available cities names and returns it as a string list
-        public List<string> GetAllCities()
+        public async Task<List<string>> GetAllCities()
         {
             if(cacheCities.Count > 0)
             {
@@ -23,7 +23,7 @@ namespace velibService
             else
             {
                 List<string> cities = new List<string>();
-                WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/contracts/?apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30");
+                WebRequest request = await Task.Run(() => WebRequest.Create("https://api.jcdecaux.com/vls/v1/contracts/?apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30"));
                 // Create a request for the URL. 
                 // If required by the server, set the credentials.
                 request.Credentials = CredentialCache.DefaultCredentials;
@@ -52,13 +52,8 @@ namespace velibService
             
         }
 
-        public async Task<List<string>> GetAllCitiesAsync()
-        {
-            return await Task.Factory.StartNew(() => GetAllCities());
-        }
-
         //Make a request to the JCDecaux server to retrieve all available stations names for the given city name and returns it as a string list
-        public List<string> GetAllStations(string city)
+        public async Task<List<string>> GetAllStations(string city)
         {
             if (cacheStations.ContainsKey(city.ToLower())){
                 return cacheStations[city.ToLower()];
@@ -66,7 +61,7 @@ namespace velibService
             else
             {
                 List<string> stations = new List<string>();
-                WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations/?contract=" + city + "&apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30");
+                WebRequest request = await Task.Run(() => WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations/?contract=" + city + "&apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30"));
                 // Create a request for the URL. 
                 // If required by the server, set the credentials.
                 request.Credentials = CredentialCache.DefaultCredentials;
@@ -104,14 +99,9 @@ namespace velibService
                         
         }
 
-        public async Task<List<string>> GetAllStationsAsync(string city)
+        public async Task<string> GetAvailableBikes(string station, string city)
         {
-            return await Task.Factory.StartNew(() => GetAllStations(city));
-        }
-
-        public string GetAvailableBikes(string station, string city)
-        {
-            WebRequest request = WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + city + "&apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30");
+            WebRequest request = await Task.Run(() => WebRequest.Create("https://api.jcdecaux.com/vls/v1/stations?contract=" + city + "&apiKey=b154bc54d7081fcf4106a4b2f5fd170d72d74d30"));
             // Create a request for the URL. 
             // If required by the server, set the credentials.
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -167,11 +157,6 @@ namespace velibService
             }
             
             
-        }
-
-        public async Task<string> GetAvailableBikesAsync(string station, string city)
-        {
-            return await Task.Factory.StartNew(() => GetAvailableBikes(station, city));
         }
     }
 }
