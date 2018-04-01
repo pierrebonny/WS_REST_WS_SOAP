@@ -11,7 +11,7 @@
 
 ### Interface graphique pour le client 
 
-	-Mettez la solution "SoapClient en tant que projet de démarrage et lancez
+	-Mettez la solution "SoapClient" en tant que projet de démarrage et lancez
 
 ### Système de Cache dans le web service
 
