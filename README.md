@@ -16,8 +16,8 @@
 ### Système de Cache dans le web service
 
 	Lorsque le service reste allumé:
-	-Les noms des villes ne se rechargent une fois par jour
-	-Les noms des stations correspondant aux villes déja demandées se rechargent une fois par jour
+	-Les noms des villes sont mis en cache
+	-Les noms des stations sont mis en cache
 
 
 ### Remplacer tous les accès au WS par des accès asynchrones
