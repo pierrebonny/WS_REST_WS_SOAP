@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="69772efc-dbc3-4f36-9027-b4b78db8b4e1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9011/velibService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="velibService.xsd" MetadataType="Schema" ID="7cbe143d-fb38-4af8-9131-b37f52a1d9a6" SourceId="1" SourceUrl="http://localhost:9011/velibService?xsd=xsd1" />
+    <MetadataFile FileName="velibService.disco" MetadataType="Disco" ID="bba1edca-afc9-4c91-a172-11b862354669" SourceId="1" SourceUrl="http://localhost:9011/velibService?disco" />
+    <MetadataFile FileName="velibService1.xsd" MetadataType="Schema" ID="0e354fe9-344f-42e0-94cd-c22228e178ea" SourceId="1" SourceUrl="http://localhost:9011/velibService?xsd=xsd0" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="f1c88f9b-b564-4784-9cea-d54ce2e4dcd5" SourceId="1" SourceUrl="http://localhost:9011/velibService?wsdl" />
+    <MetadataFile FileName="velibService2.xsd" MetadataType="Schema" ID="75ded524-54e6-49fd-91c4-3d39f31bd504" SourceId="1" SourceUrl="http://localhost:9011/velibService?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

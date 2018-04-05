@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace consoleClient
 {
     class Program
     {
         static void Main(string[] args){
-            Service1Client client = new Service1Client();
+            Service1CallbackSink objsink = new Service1CallbackSink();
+            InstanceContext iCntxt = new InstanceContext(objsink);
+
+            ServiceReference1.Service1Client objClient = new ServiceReference1.Service1Client(iCntxt);
+            objClient.SubscribeAvailableBikesRecovered();
+            objClient.SubscribeAvailableBikesRecoveringFinished();
+            objClient.GetAvailableBikes("metro empalot", "toulouse");
+            /*Service1Client client = new Service1Client();
             Console.WriteLine("tapez vos commandes ou help pour obtenir de l'aide");
             string entry = "";
             while (!entry.Equals("exit"))
             {
                 entry = Console.ReadLine();
                 Console.WriteLine(returnInfos(entry,client));                
-            }
+            }*/
             
 
         }

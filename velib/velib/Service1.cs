@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace velibService
@@ -10,6 +11,9 @@ namespace velibService
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Service1 : IService1
     {
+        static Action<String, String, String> m_Event1 = delegate { };
+        static Action m_Event2 = delegate { };
+
         private static Dictionary<string, List<string>> cacheStations = new Dictionary<string,List<string>>();
         private static List<string> cacheCities = new List<string>();
 
@@ -87,6 +91,7 @@ namespace velibService
                         stations.Add((string)item.SelectToken("name"));
                     }
                     cacheStations.Add(city.ToLower(),stations);
+                    
                     return stations;
                 }
                 //if the name doesn't exist in the JCDecaux's database
@@ -141,14 +146,17 @@ namespace velibService
                 response.Close();
 
                 //if a station has been detected for the given name
-
+                IService1Events events = OperationContext.Current.GetCallbackChannel<IService1Events>();
+                
                 if (stationn != null)
                 {
+                    events.availableBikesRecovered(station, city,number+"");
                     return "\n\nStation = " + stationn + "\n\nNombre de vélos disponibles = " + number;
                 }
                 //else if no station has been detected for the given name
                 else
                 {
+                    events.availableBikesRecovered(station, city, "unknown station");
                     return "\n\nAucune information n'a été trouvée à propos de : " + stringToFind;
                 }
             //if the city or station name doesn't exist in the JCDecaux's database
@@ -157,6 +165,20 @@ namespace velibService
             }
             
             
+        }
+
+        public void SubscribeAvailableBikesRecovered()
+        {
+            IService1Events subscriber =
+            OperationContext.Current.GetCallbackChannel<IService1Events>();
+            m_Event1 += subscriber.availableBikesRecovered;
+        }
+
+        public void SubscribeAvailableBikesRecoveringFinished()
+        {
+            IService1Events subscriber =
+            OperationContext.Current.GetCallbackChannel<IService1Events>();
+            m_Event2 += subscriber.availableBikesRecoveringFinished;
         }
     }
 }
