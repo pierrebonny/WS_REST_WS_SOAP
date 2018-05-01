@@ -16,7 +16,10 @@ namespace consoleClient
             ServiceReference1.Service1Client objClient = new ServiceReference1.Service1Client(iCntxt);
             objClient.SubscribeAvailableBikesRecovered();
             objClient.SubscribeAvailableBikesRecoveringFinished();
-            objClient.GetAvailableBikes("metro empalot", "toulouse");
+            String answer = objClient.GetAvailableBikes("42", "toulouse");
+
+            Console.WriteLine(answer);
+            Console.ReadLine();
             /*Service1Client client = new Service1Client();
             Console.WriteLine("tapez vos commandes ou help pour obtenir de l'aide");
             string entry = "";

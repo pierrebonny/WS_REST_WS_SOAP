@@ -114,8 +114,6 @@ namespace velibService
             try
             {
                 WebResponse response = request.GetResponse();
-                // Display the status.
-                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
                 // Get the stream containing content returned by the server.
                 Stream dataStream = response.GetResponseStream();
                 // Open the stream using a StreamReader for easy access.
@@ -124,7 +122,6 @@ namespace velibService
                 string responseFromServer = reader.ReadToEnd();
                 // Display the content.
                 JArray j = JArray.Parse(responseFromServer);
-                Console.WriteLine(responseFromServer);
                 int number = 0;
                 string stationn = "";
                 string stringToFind = station;
@@ -146,17 +143,18 @@ namespace velibService
                 response.Close();
 
                 //if a station has been detected for the given name
-                IService1Events events = OperationContext.Current.GetCallbackChannel<IService1Events>();
                 
                 if (stationn != null)
                 {
-                    events.availableBikesRecovered(station, city,number+"");
+                    m_Event1(station, city,number+"");
+                    m_Event2();
                     return "\n\nStation = " + stationn + "\n\nNombre de vélos disponibles = " + number;
                 }
                 //else if no station has been detected for the given name
                 else
                 {
-                    events.availableBikesRecovered(station, city, "unknown station");
+                    m_Event1(station, city, "unknown station");
+                    m_Event2();
                     return "\n\nAucune information n'a été trouvée à propos de : " + stringToFind;
                 }
             //if the city or station name doesn't exist in the JCDecaux's database
