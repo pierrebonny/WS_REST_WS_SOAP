@@ -14,7 +14,7 @@ namespace velibHost
             {
                 ServiceHost host = new ServiceHost(typeof(velibService.Service1));
                 host.Open();
-                Console.WriteLine("Service is Hosted as http://localhost:9011/CalcService");
+                Console.WriteLine("Service is Hosted as http://localhost:9011/velibService");
                 Console.WriteLine("\nPress  key to stop the service.");
                 Console.ReadLine();
                 host.Close();
