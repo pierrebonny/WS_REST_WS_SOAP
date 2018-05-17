@@ -14,8 +14,8 @@ namespace consoleClient
             InstanceContext iCntxt = new InstanceContext(objsink);
 
             ServiceReference1.Service1Client objClient = new ServiceReference1.Service1Client(iCntxt);
-            String answer = objClient.GetAvailableBikes("156", "toulouse");
             objClient.SuscribeStationEvent("156", "toulouse");
+            String answer = objClient.GetAvailableBikes("156", "toulouse");
             Console.WriteLine("Vous avez bien souscrit");
 
 
