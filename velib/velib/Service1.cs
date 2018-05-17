@@ -11,11 +11,17 @@ namespace velibService
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Service1 : IService1
     {
-        static Action<String, String, String> m_Event1 = delegate { };
-        static Action m_Event2 = delegate { };
+        private Dictionary<Tuple<string, string>, Action<string, int>> actions;
+        private Dictionary<Tuple<string, string>, int> bikes;
 
         private static Dictionary<string, List<string>> cacheStations = new Dictionary<string,List<string>>();
         private static List<string> cacheCities = new List<string>();
+
+        public Service1()
+        {
+            actions = new Dictionary<Tuple<string, string>, Action<string, int>>();
+            bikes = new Dictionary<Tuple<string, string>, int>();
+        }
 
         //Make a request to the JCDecaux server to retrieve all available cities names and returns it as a string list
         public async Task<List<string>> GetAllCities()
@@ -146,16 +152,17 @@ namespace velibService
                 
                 if (stationn != null)
                 {
-                    m_Event1(station, city,number+"");
-                    m_Event2();
+                    Tuple<string, string> tuple = new Tuple<string, string>(city, station);
+                    if (actions.ContainsKey(tuple) && !bikes[tuple].Equals(number))
+                    {
+                        actions[tuple](stationn, number);
+                        bikes[tuple] = number;
+                    }
                     return "\n\nStation = " + stationn + "\n\nNombre de vélos disponibles = " + number;
                 }
-                //else if no station has been detected for the given name
                 else
                 {
-                    m_Event1(station, city, "unknown station");
-                    m_Event2();
-                    return "\n\nAucune information n'a été trouvée à propos de : " + stringToFind;
+                    return "informations sur la station introuvable";
                 }
             //if the city or station name doesn't exist in the JCDecaux's database
             }catch (System.Net.WebException){
@@ -165,18 +172,21 @@ namespace velibService
             
         }
 
-        public void SubscribeAvailableBikesRecovered()
+        public void SuscribeStationEvent(string station, string city)
         {
-            IService1Events subscriber =
-            OperationContext.Current.GetCallbackChannel<IService1Events>();
-            m_Event1 += subscriber.availableBikesRecovered;
-        }
-
-        public void SubscribeAvailableBikesRecoveringFinished()
-        {
-            IService1Events subscriber =
-            OperationContext.Current.GetCallbackChannel<IService1Events>();
-            m_Event2 += subscriber.availableBikesRecoveringFinished;
+            IService1Events subscriber = OperationContext.Current.GetCallbackChannel<IService1Events>();
+            Tuple<string, string> tuple = new Tuple<string, string>(city, station);
+            if (actions.ContainsKey(tuple))
+            {
+                actions[tuple] += subscriber.GetStation;
+            }
+            else
+            {
+                Action<string, int> newEvent = delegate { };
+                newEvent += subscriber.GetStation;
+                actions.Add(tuple, newEvent);
+                bikes.Add(tuple, -1);
+            }
         }
     }
 }

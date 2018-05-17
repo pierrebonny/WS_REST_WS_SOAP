@@ -42,38 +42,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SubscribeAvailableBikesRecovered">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeAvailableBikesRecoveredResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeAvailableBikesRecoveringFinished">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SubscribeAvailableBikesRecoveringFinishedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="availableBikesRecovered">
+  <xs:element name="SuscribeStationEvent">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="station" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="result" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="availableBikesRecoveringFinished">
+  <xs:element name="SuscribeStationEventResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetStation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="station" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bikes" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

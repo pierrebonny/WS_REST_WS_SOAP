@@ -22,9 +22,6 @@ namespace velibService
         Task<List<String>> GetAllStations(String city);
 
         [OperationContract]
-        void SubscribeAvailableBikesRecovered();
-
-        [OperationContract]
-        void SubscribeAvailableBikesRecoveringFinished();
+        void SuscribeStationEvent(string station, string city);
     }
 }

@@ -14,9 +14,10 @@ namespace consoleClient
             InstanceContext iCntxt = new InstanceContext(objsink);
 
             ServiceReference1.Service1Client objClient = new ServiceReference1.Service1Client(iCntxt);
-            objClient.SubscribeAvailableBikesRecovered();
-            objClient.SubscribeAvailableBikesRecoveringFinished();
-            String answer = objClient.GetAvailableBikes("42", "toulouse");
+            String answer = objClient.GetAvailableBikes("156", "toulouse");
+            objClient.SuscribeStationEvent("156", "toulouse");
+            Console.WriteLine("Vous avez bien souscrit");
+
 
             Console.WriteLine(answer);
             Console.ReadLine();
@@ -33,7 +34,7 @@ namespace consoleClient
         }
 
         //This method calls the web service to retrieve ask informations
-        private static string returnInfos(string command,Service1Client client)
+        private static string returnInfos(string command,ServiceReference1.Service1Client client)
         {
             string[] splittedCommand = command.ToLower().Split(' ');
             switch (splittedCommand[0])

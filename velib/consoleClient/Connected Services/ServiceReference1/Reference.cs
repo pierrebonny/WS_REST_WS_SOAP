@@ -33,27 +33,18 @@ namespace consoleClient.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllStations", ReplyAction="http://tempuri.org/IService1/GetAllStationsResponse")]
         System.Threading.Tasks.Task<string[]> GetAllStationsAsync(string city);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SubscribeAvailableBikesRecovered", ReplyAction="http://tempuri.org/IService1/SubscribeAvailableBikesRecoveredResponse")]
-        void SubscribeAvailableBikesRecovered();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SuscribeStationEvent", ReplyAction="http://tempuri.org/IService1/SuscribeStationEventResponse")]
+        void SuscribeStationEvent(string station, string city);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SubscribeAvailableBikesRecovered", ReplyAction="http://tempuri.org/IService1/SubscribeAvailableBikesRecoveredResponse")]
-        System.Threading.Tasks.Task SubscribeAvailableBikesRecoveredAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SubscribeAvailableBikesRecoveringFinished", ReplyAction="http://tempuri.org/IService1/SubscribeAvailableBikesRecoveringFinishedResponse")]
-        void SubscribeAvailableBikesRecoveringFinished();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SubscribeAvailableBikesRecoveringFinished", ReplyAction="http://tempuri.org/IService1/SubscribeAvailableBikesRecoveringFinishedResponse")]
-        System.Threading.Tasks.Task SubscribeAvailableBikesRecoveringFinishedAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SuscribeStationEvent", ReplyAction="http://tempuri.org/IService1/SuscribeStationEventResponse")]
+        System.Threading.Tasks.Task SuscribeStationEventAsync(string station, string city);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IService1Callback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/availableBikesRecovered")]
-        void availableBikesRecovered(string station, string city, string result);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/availableBikesRecoveringFinished")]
-        void availableBikesRecoveringFinished();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/GetStation")]
+        void GetStation(string station, int bikes);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -108,20 +99,12 @@ namespace consoleClient.ServiceReference1 {
             return base.Channel.GetAllStationsAsync(city);
         }
         
-        public void SubscribeAvailableBikesRecovered() {
-            base.Channel.SubscribeAvailableBikesRecovered();
+        public void SuscribeStationEvent(string station, string city) {
+            base.Channel.SuscribeStationEvent(station, city);
         }
         
-        public System.Threading.Tasks.Task SubscribeAvailableBikesRecoveredAsync() {
-            return base.Channel.SubscribeAvailableBikesRecoveredAsync();
-        }
-        
-        public void SubscribeAvailableBikesRecoveringFinished() {
-            base.Channel.SubscribeAvailableBikesRecoveringFinished();
-        }
-        
-        public System.Threading.Tasks.Task SubscribeAvailableBikesRecoveringFinishedAsync() {
-            return base.Channel.SubscribeAvailableBikesRecoveringFinishedAsync();
+        public System.Threading.Tasks.Task SuscribeStationEventAsync(string station, string city) {
+            return base.Channel.SuscribeStationEventAsync(station, city);
         }
     }
 }

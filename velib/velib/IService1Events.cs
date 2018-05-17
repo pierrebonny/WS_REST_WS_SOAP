@@ -10,9 +10,6 @@ namespace velibService
     interface IService1Events
     {
         [OperationContract(IsOneWay = true)]
-        void availableBikesRecovered(String station, String city, String result);
-
-        [OperationContract(IsOneWay = true)]
-        void availableBikesRecoveringFinished();
+        void GetStation(string station, int bikes);
     }
 }

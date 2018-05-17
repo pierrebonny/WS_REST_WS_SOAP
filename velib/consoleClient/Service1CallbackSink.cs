@@ -8,16 +8,9 @@ namespace consoleClient
 {
     class Service1CallbackSink : ServiceReference1.IService1Callback
     {
-        public void availableBikesRecovered(string station, string city, string result)
+        public void GetStation(string station, int bikes)
         {
-            Console.WriteLine("City ...: {0}", city);
-            Console.WriteLine("Station ...: {0}", station);
-            Console.WriteLine("Available Bikes ......: {0}", result);
-        }
-
-        public void availableBikesRecoveringFinished()
-        {
-            Console.WriteLine("availableBikes recovering completed");
+            Console.WriteLine(station + " - " + bikes);
         }
     }
 }
