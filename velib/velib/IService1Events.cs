@@ -10,6 +10,6 @@ namespace velibService
     interface IService1Events
     {
         [OperationContract(IsOneWay = true)]
-        void GetStation(string station, int bikes);
+        void GetStation(string city, string station, int value);
     }
 }

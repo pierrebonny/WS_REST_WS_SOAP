@@ -11,17 +11,11 @@ namespace velibService
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class Service1 : IService1
     {
-        private Dictionary<Tuple<string, string>, Action<string, int>> actions;
-        private Dictionary<Tuple<string, string>, int> bikes;
+        static Action<string, string, int> m_EventCounter = delegate { };
+        private IDictionary<Tuple<string, string>, int> bikes = new Dictionary<Tuple<string, string>, int>();
 
         private static Dictionary<string, List<string>> cacheStations = new Dictionary<string,List<string>>();
         private static List<string> cacheCities = new List<string>();
-
-        public Service1()
-        {
-            actions = new Dictionary<Tuple<string, string>, Action<string, int>>();
-            bikes = new Dictionary<Tuple<string, string>, int>();
-        }
 
         //Make a request to the JCDecaux server to retrieve all available cities names and returns it as a string list
         public async Task<List<string>> GetAllCities()
@@ -152,11 +146,14 @@ namespace velibService
                 
                 if (stationn != null)
                 {
-                    Tuple<string, string> tuple = new Tuple<string, string>(city, station);
-                    if (actions.ContainsKey(tuple) && !bikes[tuple].Equals(number))
-                    {
-                        actions[tuple](stationn, number);
-                        bikes[tuple] = number;
+                    int oldValue;
+                    //Si on ne connait pas la valeur alors on l'ajoute pour la garder en mémoire
+                    if (!bikes.TryGetValue(new Tuple<string, string>(city, station), out oldValue))
+                        bikes.Add(new Tuple<string, string>(city, station), number);
+                    else if (oldValue != number)
+                    { //Sinon on va regarder si le nombre de vélos a changé et si c'est le cas notifier le client
+                        bikes.Add(new Tuple<string, string>(city, station), number);
+                        m_EventCounter(city, station, number);
                     }
                     return "\n\nStation = " + stationn + "\n\nNombre de vélos disponibles = " + number;
                 }
@@ -175,18 +172,7 @@ namespace velibService
         public void SuscribeStationEvent(string station, string city)
         {
             IService1Events subscriber = OperationContext.Current.GetCallbackChannel<IService1Events>();
-            Tuple<string, string> tuple = new Tuple<string, string>(city, station);
-            if (actions.ContainsKey(tuple))
-            {
-                actions[tuple] += subscriber.GetStation;
-            }
-            else
-            {
-                Action<string, int> newEvent = delegate { };
-                newEvent += subscriber.GetStation;
-                actions.Add(tuple, newEvent);
-                bikes.Add(tuple, -1);
-            }
+            m_EventCounter += subscriber.GetStation;
         }
     }
 }

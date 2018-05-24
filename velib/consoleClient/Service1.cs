@@ -45,7 +45,7 @@ public interface IService1Callback
 {
     
     [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService1/GetStation")]
-    void GetStation(string station, int bikes);
+    void GetStation(string city, string station, int value);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

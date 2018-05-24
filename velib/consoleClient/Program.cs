@@ -14,27 +14,20 @@ namespace consoleClient
             InstanceContext iCntxt = new InstanceContext(objsink);
 
             ServiceReference1.Service1Client objClient = new ServiceReference1.Service1Client(iCntxt);
-            objClient.SuscribeStationEvent("156", "toulouse");
-            String answer = objClient.GetAvailableBikes("156", "toulouse");
-            Console.WriteLine("Vous avez bien souscrit");
-
-
-            Console.WriteLine(answer);
-            Console.ReadLine();
-            /*Service1Client client = new Service1Client();
+            //Console.WriteLine(answer);
             Console.WriteLine("tapez vos commandes ou help pour obtenir de l'aide");
             string entry = "";
             while (!entry.Equals("exit"))
             {
                 entry = Console.ReadLine();
-                Console.WriteLine(returnInfos(entry,client));                
-            }*/
+                Console.WriteLine(returnInfos(entry,objClient));                
+            }
             
 
         }
 
         //This method calls the web service to retrieve ask informations
-        private static string returnInfos(string command,ServiceReference1.Service1Client client)
+        private static string returnInfos(string command,ServiceReference1.Service1Client objClient)
         {
             string[] splittedCommand = command.ToLower().Split(' ');
             switch (splittedCommand[0])
@@ -42,10 +35,11 @@ namespace consoleClient
                 case "help":
                     return "Obtenir la liste des villes : tapez cities\n" +
                            "Afficher la liste des stations d'une ville : tapez stations puis un espace puis le nom de la ville\n" +
-                           "Obtenir la liste des stations disponibles : tapez bikes puis un espace puis le nom de la ville encore un espace et le nom de la station\n"+
+                           "Obtenir le nombre de vélos disponibles : tapez bikes puis un espace puis le nom de la ville encore un espace et le nom de la station\n"+
+                           "Souscrire à une station: tapez subscribe puis un espace puis le nom de la ville encore un espace et le nom de la station\n"+
                            "Quitter la console : exit";
                 case "cities":
-                    string[] cities = client.GetAllCities();
+                    string[] cities = objClient.GetAllCities();
                     string result = "\n";
                     for(int i = 0; i < cities.Length; i++)
                     {
@@ -53,7 +47,7 @@ namespace consoleClient
                     }
                     return result;
                 case "stations":
-                    string[] stations = client.GetAllStations(splittedCommand[1]);
+                    string[] stations = objClient.GetAllStations(splittedCommand[1]);
                     string result1 = "\n";
                     for (int i = 0; i < stations.Length; i++)
                     {
@@ -67,7 +61,16 @@ namespace consoleClient
                         station += splittedCommand[i] + " ";
                     }
                     station = station.Remove(station.Length - 1);
-                    return client.GetAvailableBikes(station.ToUpper(), splittedCommand[1]);
+                    return objClient.GetAvailableBikes(station.ToUpper(), splittedCommand[1]);
+                case "subscribe":
+                    string station1 = "";
+                    for (int i = 2; i < splittedCommand.Length; i++)
+                    {
+                        station1 += splittedCommand[i] + " ";
+                    }
+                    station1 = station1.Remove(station1.Length - 1);
+                    objClient.SuscribeStationEvent(station1.ToUpper(), splittedCommand[1]);
+                    return "vous avez bien souscrit";
                 default:
                     return "commande non reconnue";
             }
